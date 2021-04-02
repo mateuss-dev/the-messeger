@@ -40,13 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     #3rd party
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'crispy_forms',
+
     # Local apps
-    'users.apps.UsersConfig',
-    'pages.apps.PagesConfig',
     
 ]
 
@@ -65,7 +60,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -132,30 +127,12 @@ STATIC_URL = '/static/'
 
 # Django all_auth
 
-AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
-]
 
 AUTH_USER_MODEL = "users.User"
-SITE_ID = 1
-LOGIN_REDIRECT_URL = "/"
-
-ACCOUNT_SESSION_REMEMBER = True
 
 
-# Só precisa digitar a senha uma vez
-ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
-# Não precisa de username
-ACCOUNT_USERNAME_REQUIRED = False
-# Para desenvolvimento backend para verificação de email
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-# Método de autenticação: email
-ACCOUNT_AUTHENTICATION_METHOD = "email"
-# Email obrigatório
-ACCOUNT_EMAIL_REQUIRED = True
-# Email único
-ACCOUNT_UNIQUE_EMAIL = True
+
+
 
 
 
