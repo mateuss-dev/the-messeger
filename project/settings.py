@@ -157,7 +157,7 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 # Não precisa de username
 ACCOUNT_USERNAME_REQUIRED = False
 # Para desenvolvimento backend para verificação de email
-# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # Método de autenticação: email
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 # Email obrigatório
