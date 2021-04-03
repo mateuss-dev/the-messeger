@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+# Django Decouple
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '796=5smpz$g@8v)bthxyssvis#7m4-$1p=)lmr$gmh%f!9lj0l'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['localhost']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -65,7 +67,7 @@ ROOT_URLCONF = 'project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "pages/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -130,6 +132,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# Needed to have style on html
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+    '/pages/static',
+]
+
 # Django all_auth
 
 AUTHENTICATION_BACKENDS = [
@@ -149,7 +157,7 @@ ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 # Não precisa de username
 ACCOUNT_USERNAME_REQUIRED = False
 # Para desenvolvimento backend para verificação de email
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # Método de autenticação: email
 ACCOUNT_AUTHENTICATION_METHOD = "email"
 # Email obrigatório
@@ -162,3 +170,12 @@ ACCOUNT_UNIQUE_EMAIL = True
 # Django-crispy
 
 CRYSPY_TEMPLATE_PACK = "bootstrap4"
+
+# SMTP Configuration
+EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
+
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
